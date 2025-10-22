@@ -4,7 +4,7 @@ import React, { useCallback, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
-import { Bars3Icon, BugAntIcon, CalendarIcon, CubeIcon, HomeIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, BugAntIcon, HomeIcon } from "@heroicons/react/24/outline";
 import {
   DappConsoleButton,
   FaucetButton,
@@ -29,7 +29,6 @@ export const menuLinks: HeaderMenuLink[] = [
   {
     label: "Events",
     href: "/events",
-    icon: <CalendarIcon className="h-4 w-4" />,
   },
   {
     label: "Debug Contracts",
@@ -39,7 +38,6 @@ export const menuLinks: HeaderMenuLink[] = [
   {
     label: "Block Explorer",
     href: "/blockexplorer",
-    icon: <CubeIcon className="h-4 w-4" />,
   },
 ];
 
@@ -83,7 +81,8 @@ export const Header = () => {
 
   return (
     <header className="sticky lg:static top-0 navbar bg-base-900 min-h-0 flex-shrink-0 justify-between z-20 px-0 sm:px-2 border-b border-[#252442]">
-      <div className="navbar-start w-auto lg:w-1/2">
+      <div className="navbar-start w-auto lg:w-1/4">
+        {/* Mobile Burger Menu */}
         <div className="lg:hidden dropdown" ref={burgerMenuRef}>
           <label
             tabIndex={0}
@@ -107,6 +106,7 @@ export const Header = () => {
           )}
         </div>
 
+        {/* Logo */}
         <Link href="/" passHref className="hidden lg:flex items-center gap-2 ml-4 mr-6 shrink-0">
           <div className="flex relative">
             <Logo size={24} />
@@ -116,13 +116,13 @@ export const Header = () => {
             <span className="text-xs">Ethereum dev stack</span>
           </div>
         </Link>
+      </div>
 
-        {/* ✅ Navigation section with Events link */}
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <HeaderMenuLinks />
-          </ul>
-        </div>
+      {/* ✅ Added navbar-center with horizontal menu */}
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1">
+          <HeaderMenuLinks />
+        </ul>
       </div>
 
       <div className="navbar-end flex-grow mr-4">
