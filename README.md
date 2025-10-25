@@ -25,6 +25,12 @@
 | **MyToken Contract** | `0xF775fb246c220Cb43Bb7E89b5dCf54371A7aed9f` |
 | **MyNFT Contract** | `0x46Ac8d13370C075C329FF6b960895F90f2042ee4` |
 
+## 📸 Screenshots
+
+### Events Page
+
+![Events Page screenshot](./image.png)
+
 <div align="center" style="margin-top: 24px;">
   <img alt="App demo" src="./packages/nextjs/public/scaffold-lisk-landing.png" width="100%">
 </div>
