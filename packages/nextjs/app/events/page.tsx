@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
+import { useBlockNumber } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth";
 
@@ -13,12 +14,16 @@ const Events: NextPage = () => {
   const { isConnected } = useAccount();
   const [eventType, setEventType] = useState<"token" | "nft">("token");
 
-  // TODO: Step 3 - Add event fetching logic
-  // Get token transfer events
+  // Inside your component
+  const { data: currentBlock } = useBlockNumber();
+
+  // Calculate recent block (last 50,000 blocks)
+  const recentBlock = currentBlock ? currentBlock - 50000n : 28000000n;
+
   const { data: tokenEvents, isLoading: tokenLoading } = useScaffoldEventHistory({
     contractName: "MyToken",
     eventName: "Transfer",
-    fromBlock: 0n,
+    fromBlock: recentBlock, // ← Use dynamic recent block
     watch: true,
   });
 
@@ -26,7 +31,7 @@ const Events: NextPage = () => {
   const { data: nftEvents, isLoading: nftLoading } = useScaffoldEventHistory({
     contractName: "MyNFT",
     eventName: "Transfer",
-    fromBlock: 0n,
+    fromBlock: recentBlock, // ← Use dynamic recent block
     watch: true,
   });
 
